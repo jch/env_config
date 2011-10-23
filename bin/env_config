@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+require 'env_config'
+
+unless ARGV.size == 1
+  puts "Simple configuration management with environment variables"
+  puts ""
+  puts "Run 'env_config init' to initialize configuration yaml and loader."
+  puts "Please visit https://github.com/jch/env_config for more details."
+  puts ""
+  puts "Example:"
+  puts ""
+  puts "env_config init config/application.yml config/initializers/env_config.rb"
+  puts ""
+  exit 1
+end
+
+# TODO: gross that defaults are duplicated here. Ideally would just run
+# rake env_config:init config_path=... loader_path=...
+config_path = ARGV[1] || 'config/application.yml'
+loader_path = ARGV[2] || 'config/initializers/env_config.rb'
+
+EnvConfig.init!(config_path, loader_path)

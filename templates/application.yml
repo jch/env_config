@@ -1,0 +1,7 @@
+# Each key value pair in this file will be read by EnvConfig and set to an
+# environment variable. If an environment variable already exists, then it is
+# not overridden by default.  See EnvConfig.configure for more options.
+
+
+env_config: 'config1_value'
+erb_config: <%= "you can use erb" %>

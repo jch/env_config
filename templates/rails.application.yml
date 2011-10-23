@@ -1,0 +1,22 @@
+# Each key value pair in this file will be read by EnvConfig and set to an
+# environment variable. If an environment variable already exists, then it is
+# not overridden by default. See EnvConfig.configure for more options.
+
+# shared variables
+common: &common
+  env_config1: 'config1_value'
+  env_config2: <%= "you can use erb" %>
+
+# environment specifc variables
+development:
+  <<: *common
+  env_config1: 'config1_override'
+
+test:
+  <<: *common
+
+# If your app is deployed on Heroku, then production Heroku values will
+# override these settings because existing variables are not overridden by
+# default. See also: http://devcenter.heroku.com/articles/config-vars
+production:
+  <<: *common
