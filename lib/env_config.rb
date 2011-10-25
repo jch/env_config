@@ -30,13 +30,6 @@ module EnvConfig
     end
   end
 
-  # Creates initial application.yml and loader. See env_config.rake
-  def init!(config_path, loader_path)
-    require 'rake'
-    load 'tasks/env_config.rake'
-    Rake::Task['env_config:init'].invoke(config_path, loader_path)
-  end
-
   private
 
   # iterate through namespaces until we have the scoped config we want

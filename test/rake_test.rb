@@ -1,6 +1,8 @@
 require 'test_helper'
 require 'pathname'
 require 'fstest'
+require 'rake'
+load    'tasks/env_config.rake'
 
 class RakeTest < Test::Unit::TestCase
   include FSTest

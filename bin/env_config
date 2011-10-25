@@ -1,23 +1,32 @@
 #!/usr/bin/env ruby
 
-require 'env_config'
+require 'optparse'
 
-unless ARGV.size == 1
-  puts "Simple configuration management with environment variables"
-  puts ""
-  puts "Run 'env_config init' to initialize configuration yaml and loader."
-  puts "Please visit https://github.com/jch/env_config for more details."
-  puts ""
-  puts "Example:"
-  puts ""
-  puts "env_config init config/application.yml config/initializers/env_config.rb"
-  puts ""
-  exit 1
+option_parser = OptionParser.new do |opts|
+  opts.banner = "EnvConfig - Simple app configuration management with environment variables"
+  opts.separator " "
+  opts.separator "SYNOPSIS"
+  opts.separator "Generate configuration yaml and configuration loader."
+  opts.separator " "
+  opts.separator "  env_config init [OPTIONS]"
+  opts.separator " "
+  opts.separator "OPTIONS"
+
+  opts.on('-c', '--config-path=CONFIG_PATH', 'path to output generated application.yml. Default: config/application.yml') do |path|
+    @config_path = path || 'config/application.yml'
+  end
+
+  opts.on('-l', '--loader_path=LOADER_PATH', 'path to output generated EnvConfig initializer. Default: env_config.rb') do |path|
+    @loader_path = path || 'env_config.rb'
+  end
+
+  opts.on_tail('--help', '-h', "display this help information") do
+    puts opts
+    exit
+  end
 end
+option_parser.parse!(ARGV)
 
-# TODO: gross that defaults are duplicated here. Ideally would just run
-# rake env_config:init config_path=... loader_path=...
-config_path = ARGV[1] || 'config/application.yml'
-loader_path = ARGV[2] || 'config/initializers/env_config.rb'
-
-EnvConfig.init!(config_path, loader_path)
+require 'rake'
+load    'tasks/env_config.rake'
+Rake::Task['env_config:init'].invoke(@config_path, @loader_path)
