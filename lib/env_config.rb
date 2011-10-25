@@ -3,8 +3,7 @@ require "erb"
 require "pathname"
 require "yaml"
 require "env_config/config"
-require 'rake'
-load 'tasks/env_config.rake'
+require "env_config/railtie" if defined?(Rails)
 
 module EnvConfig
   extend self
