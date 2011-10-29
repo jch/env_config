@@ -20,4 +20,5 @@ Gem::Specification.new do |gem|
   gem.version       = EnvConfig::VERSION
 
   gem.add_development_dependency "fstest"
+  gem.add_development_dependency "rake"
 end
