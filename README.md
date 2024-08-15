@@ -1,5 +1,7 @@
 # EnvConfig
 
+*This gem is archived and no longer maintained. The rubygem name is released and does not reference this project.*
+
 Simple configuration management with environment variables.
 
 Inspired by how Heroku uses environment variables for configs, EnvConfig 
